@@ -16,12 +16,40 @@ public class Lab02 extends Application {
 
     private final double canvasSize = 500.0;
 
-    private final Heart heart;
+    private final Heart heartMain1;
+    private final Heart heartMain2;
+    private final Heart heartMain3;
+    private final Heart heartChanging;
 
     final double heartSize = 100.0;
 
     public Lab02() {
-        heart = new Heart(
+        heartMain1 = new Heart(
+                getR0(heartSize),
+                getR1(heartSize),
+                getR2(heartSize),
+                getR3(heartSize),
+                getR4(heartSize),
+                canvasSize
+        );
+        heartMain2 = new Heart(
+                getR0(heartSize / 2.0),
+                getR1(heartSize / 2.0),
+                getR2(heartSize / 2.0),
+                getR3(heartSize / 2.0),
+                getR4(heartSize / 2.0),
+                canvasSize
+        );
+        heartMain3 = new Heart(
+                getR0(heartSize / 4.0),
+                getR1(heartSize / 4.0),
+                getR2(heartSize / 4.0),
+                getR3(heartSize / 4.0),
+                getR4(heartSize / 4.0),
+                canvasSize
+        );
+
+        heartChanging = new Heart(
                 getR0(heartSize),
                 getR1(heartSize),
                 getR2(heartSize),
@@ -66,11 +94,14 @@ public class Lab02 extends Application {
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvasSize, canvasSize);
 
-        // #1
+        // Static
+        heartMain1.draw(gc, new Vector2d(canvasSize / 2.0, canvasSize * 0.75), 0.0, Color.BLACK);
+
+        // Dynamic
         for (double size = heartSize; size >= heartSize / 24.0; size -= heartSize / 12.0) {
             final double baseR0 = getR0(size);
             final double baseR4 = getR4(size);
-            heart.setRs(
+            heartChanging.setRs(
                     baseR0 + baseR0 / 3.0 * Math.sin(2 * time),
                     getR1(size),
                     getR2(size),
@@ -78,50 +109,23 @@ public class Lab02 extends Application {
                     baseR4 + baseR4 * 0.75 * Math.sin(2 * time)
             );
 
-            heart.draw(gc, new Vector2d(canvasSize / 4.0, canvasSize / 2.0), 0.0,
+            heartChanging.draw(gc, new Vector2d(canvasSize / 4.0, canvasSize / 3.0), 0.0,
                     Color.rgb((int) (size / heartSize * 255), (int) (0.2 * 255), (int) (0.4 * 255)));
         }
 
         // #2 first circle
-        heart.setRs(
-                getR0(heartSize),
-                getR1(heartSize),
-                getR2(heartSize),
-                getR3(heartSize),
-                getR4(heartSize)
-        );
         for (double angle = 0.0; angle < 360; angle += 30.0) {
-            final double shiftedAngle = angle + (time * 60) % 30;
-
-            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.AQUA);
+            heartMain1.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.AQUA);
         }
 
         // #2 second circle
-        heart.setRs(
-                getR0(heartSize / 2.0),
-                getR1(heartSize / 2.0),
-                getR2(heartSize / 2.0),
-                getR3(heartSize / 2.0),
-                getR4(heartSize / 2.0)
-        );
         for (double angle = 0.0; angle < 360; angle += 30.0) {
-            final double shiftedAngle = angle + (time * 60) % 30;
-
-            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.FUCHSIA);
+            heartMain2.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.FUCHSIA);
         }
 
         // #2 third circle
-        heart.setRs(
-                getR0(heartSize / 4.0),
-                getR1(heartSize / 4.0),
-                getR2(heartSize / 4.0),
-                getR3(heartSize / 4.0),
-                getR4(heartSize / 4.0)
-        );
         for (double angle = 0.0; angle < 360; angle += 30.0) {
-            final double shiftedAngle = angle + (time * 30) % 30;
-
-            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.ORANGE);
+            heartMain3.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.ORANGE);
         }
     }
 
@@ -138,7 +142,7 @@ public class Lab02 extends Application {
     }
 
     private double getR3(double heartSize) {
-        return heartSize / 6.0;
+        return heartSize / 8.0;
     }
 
     private double getR4(double heartSize) {

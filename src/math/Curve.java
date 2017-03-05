@@ -77,7 +77,7 @@ public class Curve {
 
         gc.beginPath();
 
-        gc.translate(ox, oy);
+        gc.translate(ox, yHeight - (yHeight == 0 ? (-1.0) : (+1.0)) * oy);
         gc.rotate(angle);
 
         gc.moveTo(startX, startY);
@@ -106,7 +106,7 @@ public class Curve {
         gc.closePath();
 
         gc.rotate(-angle);
-        gc.translate(-ox, -oy);
+        gc.translate(-ox, -yHeight + (yHeight == 0 ? (-1.0) : (+1.0)) * oy);
 
         gc.stroke();
 
