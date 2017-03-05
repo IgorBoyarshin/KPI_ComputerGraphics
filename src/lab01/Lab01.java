@@ -76,9 +76,7 @@ public class Lab01 extends Application {
         // Something in range [0;1] and based on distance from the center
         final double d = distance(pos, new Vector2d(canvasSize / 2.0, canvasSize / 2.0)) / (canvasSize * Math.sqrt(2) / 2.5);
 
-//        return new Color(1.0 - d, 1.0 - d, 0.0, 1.0);
         return new Color(0.9, d, d / 2.0, 1.0);
-//        return Color.DARKORANGE;
     }
 
     private void draw(GraphicsContext gc, double time) {
