@@ -2,6 +2,7 @@ package math;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Affine;
 import math.Vector2d;
 
 import java.util.function.Function;
@@ -19,11 +20,10 @@ public class Curve {
     private final double argStep;
     private final Vector2d argRange;
 
-    private final Function<Double, Double> xOfT;
-    private final Function<Double, Double> yOfT;
+    private Function<Double, Double> xOfT;
+    private Function<Double, Double> yOfT;
 
-    private final Function<Double, Double> yOfX;
-
+    private Function<Double, Double> yOfX;
 
     public Curve(Function<Double, Double> yOfX, Vector2d xRange, double xStep, double yHeight) {
         this.mode = Mode.CARTESIAN;
@@ -50,8 +50,13 @@ public class Curve {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void draw(GraphicsContext gc, Vector2d origin, Color color) {
+    public void draw(GraphicsContext gc, Vector2d origin, double angle, Color color) {
         gc.setStroke(color);
+
+        final double ox = origin.x;
+        final double oy = origin.y;
+        origin.x = 0.0;
+        origin.y = yHeight;
 
         final double startX;
         final double startY;
@@ -69,8 +74,14 @@ public class Curve {
                 break;
         }
 
+
         gc.beginPath();
+
+        gc.translate(ox, oy);
+        gc.rotate(angle);
+
         gc.moveTo(startX, startY);
+
         double currentArg = argRange.x + argStep;
         while (currentArg <= argRange.y) {
             final double x;
@@ -93,7 +104,25 @@ public class Curve {
             currentArg += argStep;
         }
         gc.closePath();
+
+        gc.rotate(-angle);
+        gc.translate(-ox, -oy);
+
         gc.stroke();
+
+
+    }
+
+    public void setYOfX(Function<Double, Double> newFunc) {
+        this.yOfX = newFunc;
+    }
+
+    public void setXOfT(Function<Double, Double> newFunc) {
+        this.xOfT = newFunc;
+    }
+
+    public void setYOfT(Function<Double, Double> newFunc) {
+        this.yOfT = newFunc;
     }
 
     public enum Mode {
