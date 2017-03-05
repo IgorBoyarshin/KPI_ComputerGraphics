@@ -50,8 +50,9 @@ public class Curve {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void draw(GraphicsContext gc, Vector2d origin, double angle, Color color) {
+    public void draw(GraphicsContext gc, Vector2d origin, double angle, Color color, double width) {
         gc.setStroke(color);
+        gc.setLineWidth(width);
 
         final double ox = origin.x;
         final double oy = origin.y;

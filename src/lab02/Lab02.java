@@ -14,7 +14,7 @@ public class Lab02 extends Application {
     private Stage window;
     private Canvas canvas;
 
-    private final double canvasSize = 500.0;
+    private final double canvasSize = 600.0;
 
     private final Heart heartMain1;
     private final Heart heartMain2;
@@ -91,46 +91,46 @@ public class Lab02 extends Application {
     }
 
     private void draw(GraphicsContext gc, double time) {
-        gc.setFill(Color.WHITE);
+        gc.setFill(Color.CRIMSON);
         gc.fillRect(0, 0, canvasSize, canvasSize);
 
         // Static
-        heartMain1.draw(gc, new Vector2d(canvasSize / 2.0, canvasSize * 0.75), 0.0, Color.BLACK);
+        heartMain1.draw(gc, new Vector2d(canvasSize / 2.0, canvasSize * 0.75), 0.0, Color.GREENYELLOW, 3.5);
 
         // Dynamic
         for (double size = heartSize; size >= heartSize / 24.0; size -= heartSize / 12.0) {
             final double baseR0 = getR0(size);
             final double baseR4 = getR4(size);
             heartChanging.setRs(
-                    baseR0 + baseR0 / 3.0 * Math.sin(2 * time),
+                    baseR0 + baseR0 / 4.0 * Math.sin(3 * time),
                     getR1(size),
                     getR2(size),
                     getR3(size),
-                    baseR4 + baseR4 * 0.75 * Math.sin(2 * time)
+                    baseR4 + baseR4 * 0.75 * Math.sin(3 * time)
             );
 
             heartChanging.draw(gc, new Vector2d(canvasSize / 4.0, canvasSize / 3.0), 0.0,
-                    Color.rgb((int) (size / heartSize * 255), (int) (0.2 * 255), (int) (0.4 * 255)));
+                    Color.rgb((int) (size / heartSize * 255), (int) (0.4 * 255), (int) (0.7 * 255)), 2.0);
         }
 
         // #2 first circle
         for (double angle = 0.0; angle < 360; angle += 30.0) {
-            heartMain1.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.AQUA);
+            heartMain1.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.YELLOW, 1.0);
         }
 
         // #2 second circle
         for (double angle = 0.0; angle < 360; angle += 30.0) {
-            heartMain2.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.FUCHSIA);
+            heartMain2.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.ORANGE, 1.0);
         }
 
         // #2 third circle
         for (double angle = 0.0; angle < 360; angle += 30.0) {
-            heartMain3.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.ORANGE);
+            heartMain3.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 3.0), angle, Color.RED, 1.0);
         }
     }
 
     private double getR0(double heartSize) {
-        return heartSize * 0.7;
+        return heartSize * 1.0;
     }
 
     private double getR1(double heartSize) {
