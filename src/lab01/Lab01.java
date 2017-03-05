@@ -149,7 +149,7 @@ public class Lab01 extends Application {
         gc.strokeLine(boxLeft.x, boxLeft.y, boxUp.x, boxUp.y);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
 }
