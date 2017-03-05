@@ -58,6 +58,8 @@ public class Curve {
         switch (mode) {
             case PARAMETRIC:
                 startX = xOfT.apply(argRange.x) + origin.x;
+                // no invert: yOfT.apply(argRange.x) + origin.y
+                // invert:    yHeight - (yOfT.apply(argRange.x) + origin.y)
                 startY = yHeight - (yHeight == 0 ? (-1.0) : (+1.0)) * (yOfT.apply(argRange.x) + origin.y);
                 break;
             case CARTESIAN:
@@ -92,7 +94,6 @@ public class Curve {
         }
         gc.closePath();
         gc.stroke();
-
     }
 
     public enum Mode {

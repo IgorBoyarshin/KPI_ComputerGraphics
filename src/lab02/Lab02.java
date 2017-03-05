@@ -31,18 +31,6 @@ public class Lab02 extends Application {
 
         window.setTitle("Lab02 by Igor Boyarshin && Anka Doroshenko");
 
-//        Axes axes = new Axes(
-//                400, 300,
-//                -8, 8, 1,
-//                -6, 6, 1
-//        );
-//
-//        Plot plot = new Plot(
-//                x -> .25 * (x + 4) * (x + 1) * (x - 2),
-//                -8, 8, 0.1,
-//                axes
-//        );
-
         // Creating and setting the view
         Group root = new Group();
         this.canvas = new Canvas(canvasSize, canvasSize);
