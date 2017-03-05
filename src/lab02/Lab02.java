@@ -93,7 +93,7 @@ public class Lab02 extends Application {
         for (double angle = 0.0; angle < 360; angle += 30.0) {
             final double shiftedAngle = angle + (time * 60) % 30;
 
-            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.BLUE);
+            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.AQUA);
         }
 
         // #2 second circle
@@ -107,7 +107,7 @@ public class Lab02 extends Application {
         for (double angle = 0.0; angle < 360; angle += 30.0) {
             final double shiftedAngle = angle + (time * 60) % 30;
 
-            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.GREEN);
+            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.FUCHSIA);
         }
 
         // #2 third circle
@@ -121,7 +121,7 @@ public class Lab02 extends Application {
         for (double angle = 0.0; angle < 360; angle += 30.0) {
             final double shiftedAngle = angle + (time * 30) % 30;
 
-            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.RED);
+            heart.draw(gc, new Vector2d(canvasSize * 0.75, canvasSize / 2.0), shiftedAngle, Color.ORANGE);
         }
     }
 
