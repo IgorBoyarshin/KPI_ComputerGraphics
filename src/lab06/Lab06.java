@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,7 +35,7 @@ public class Lab06 extends Application {
             Matrix4d.perspective(canvasSize, canvasSize, 67.0, 0.1, 300.0);
     private Matrix4d cameraMatrix =
             Matrix4d.identity().translate(new Vector3d(0.0, 0.0, 120.0));
-    private Matrix4d objectMatrix =
+    private Matrix4d modelMatrix =
             Matrix4d.identity().scale(new Vector3d(100.0));
 
     private final double updateFrequencySeconds = 1.0 / 30.0;
@@ -134,11 +133,11 @@ public class Lab06 extends Application {
 
     private void update(GraphicsContext gc, double secondsSinceStart) {
         if (secondsSinceStart - lastUpdateTime >= updateFrequencySeconds) {
-            objectMatrix = objectMatrix.rotateAboutAxis(5.0, new Vector3d(0.0, 0.0, 1.0));
-            objectMatrix = objectMatrix.rotateAboutAxis(5.0, new Vector3d(1.0, 0.0, 0.0));
+            modelMatrix = modelMatrix.rotateAboutAxis(5.0, new Vector3d(0.0, 0.0, 1.0));
+            modelMatrix = modelMatrix.rotateAboutAxis(5.0, new Vector3d(1.0, 0.0, 0.0));
 
             for (int index = 0; index < objectVertices.length; index++) {
-                modifiedVertices[index] = (objectMatrix).multiply(objectVertices[index]);
+                modifiedVertices[index] = (modelMatrix).multiply(objectVertices[index]);
             }
 
             facesToRender.clear();
